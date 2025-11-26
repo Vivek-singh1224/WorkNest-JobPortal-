@@ -1,189 +1,271 @@
-Job Portal – Full Stack Project
+# 💼 Job Portal – Full Stack Project
 
-A MERN-based job portal that allows users to register, apply for jobs, and recruiters to post/manage job listings.
+A comprehensive MERN-based job portal that allows users to register, apply for jobs, and enables recruiters to post and manage job listings efficiently.
 
-🚀 Tech Stack
-Frontend
+---
 
-React.js
+## 🚀 Tech Stack
 
-Tailwind CSS
+### Frontend
+- **React.js** - UI Library
+- **Tailwind CSS** - Styling Framework
+- **Shadcn UI** - Component Library
+- **Axios** - HTTP Client
+- **React Router** - Navigation
 
-Shadcn UI
+### Backend
+- **Node.js** - Runtime Environment
+- **Express.js** - Web Framework
+- **REST APIs** - API Architecture
 
-Axios
+### Database
+- **MongoDB** - NoSQL Database
+- **Mongoose** - ODM (Object Data Modeling)
 
-React Router
+### Security & Authentication
+- **JSON Web Tokens (JWT)** - Token-based Authentication
+- **bcrypt.js** - Password Hashing
+- **dotenv** - Environment Variables Management
 
-Backend
+---
 
-Node.js
+## 📁 Repository Structure
 
-Express.js
+```
+job-portal/
+├── frontend/           # React frontend application
+├── backend/            # Express backend API
+└── README.md          # Project documentation
+```
 
-REST APIs
+---
 
-Database
+## ⚙️ Setup Instructions
 
-MongoDB (Mongoose ORM)
+### 1️⃣ Clone the Repository
 
-Optional Tech Used
+```bash
+git clone https://github.com/<username>/<repository>.git
+cd <repository>
+```
 
-JSON Web Tokens (JWT)
+### 2️⃣ Backend Setup
 
-bcrypt.js
-
-dotenv
-
-📁 Repository Structure
-/frontend
-/backend
-/README.md
-
-⚙️ Setup Instructions
-1. Clone the Repository
-git clone https://github.com/<your-username>/<your-repo>.git
-cd <your-repo>
-
-Backend Setup
+```bash
 cd backend
 npm install
+```
 
-Create .env file
+**Create `.env` file in backend directory:**
+
+```env
 PORT=5000
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_secret_key
+```
 
-Run Backend
+**Run Backend Server:**
+
+```bash
 npm start
+```
 
-Frontend Setup
+The backend will run on `http://localhost:5000`
+
+### 3️⃣ Frontend Setup
+
+```bash
 cd frontend
 npm install
 npm run dev
+```
 
-🧩 ER Diagram / Schema Design (MongoDB)
-User Collection
+The frontend will run on `http://localhost:8080`
+
+---
+
+## 🗄️ Database Schema (MongoDB)
+
+### User Collection
+
+```javascript
 {
-  _id,
-  name,
-  email,
-  password,
+  _id: ObjectId,
+  name: String,
+  email: String,
+  password: String (hashed),
   role: "candidate" | "recruiter",
-  createdAt
+  createdAt: Date
 }
+```
 
-Job Collection
+### Job Collection
+
+```javascript
 {
-  _id,
-  title,
-  company,
-  description,
-  location,
-  salaryRange,
-  postedBy (userId),
-  createdAt
+  _id: ObjectId,
+  title: String,
+  company: String,
+  description: String,
+  location: String,
+  salaryRange: String,
+  postedBy: ObjectId (userId),
+  createdAt: Date
 }
+```
 
-Application Collection
+### Application Collection
+
+```javascript
 {
-  _id,
-  jobId,
-  userId,
-  resumeLink,
+  _id: ObjectId,
+  jobId: ObjectId,
+  userId: ObjectId,
+  resumeLink: String,
   status: "applied" | "reviewed" | "selected" | "rejected",
-  appliedAt
+  appliedAt: Date
 }
+```
 
-🏗️ Architecture Explanation
+---
 
-The application follows a client–server architecture:
+## 🏗️ Architecture Explanation
 
-Frontend (React)
+The application follows a **client-server architecture**:
 
-Handles UI
+### Frontend (React)
+- ✅ Handles UI rendering and user interactions
+- ✅ Manages routes (login, register, job list, job apply, dashboard)
+- ✅ Makes API calls using Axios
+- ✅ State management for user sessions
 
-Manages routes (login, register, job list, job apply, dashboard)
+### Backend (Express API)
+- 🔐 Authentication (JWT-based)
+- 📝 CRUD operations for job posts
+- 📄 Candidate job applications management
+- 👨‍💼 Recruiter dashboards and analytics
 
-Makes API calls using Axios
+### Database (MongoDB)
+- 💾 Stores users, jobs, and applications
+- ✔️ Mongoose used for schema validation
+- 🔗 Relational data modeling with references
 
-Backend (Express API)
+---
 
-Authentication (JWT-based)
+## 🔌 API Documentation
 
-CRUD operations for job posts
+### 🔐 Authentication
 
-Candidate job applications
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/api/auth/register` | Register new user |
+| POST | `/api/auth/login` | Login & get JWT token |
 
-Recruiter dashboards
+### 💼 Jobs
 
-Database (MongoDB)
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/api/jobs` | Recruiter posts a job |
+| GET | `/api/jobs` | Get all jobs |
+| GET | `/api/jobs/:id` | Get job by ID |
+| PUT | `/api/jobs/:id` | Update job post |
+| DELETE | `/api/jobs/:id` | Delete job |
 
-Stores users, jobs, and applications
+### 📄 Applications
 
-Mongoose used for schema validation
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/api/apply/:jobId` | Apply for job |
+| GET | `/api/applications/user` | Get user's applications |
+| GET | `/api/applications/job/:jobId` | Recruiter sees applicants |
 
-🔌 API Documentation
-AUTH
-Method	Endpoint	Description
-POST	/api/auth/register	Register new user
-POST	/api/auth/login	Login & get JWT token
-JOBS
-Method	Endpoint	Description
-POST	/api/jobs	Recruiter posts a job
-GET	/api/jobs	Get all jobs
-GET	/api/jobs/:id	Get job by ID
-PUT	/api/jobs/:id	Update job post
-DELETE	/api/jobs/:id	Delete job
-APPLICATIONS
-Method	Endpoint	Description
-POST	/api/apply/:jobId	Apply for job
-GET	/api/applications/user	Get user’s applications
-GET	/api/applications/job/:jobId	Recruiter sees applicants
+---
+
+## 🤖 AI Usage Log
+
+### AI Tools Used
+
+**ChatGPT**
+- Model: GPT-5.1
+- Purpose of AI Assistance
+
+| Task | Used AI? | Description |
+|------|----------|-------------|
+| UI Design | ❌ | Designed manually |
+| Backend Logic | ❌ | Implemented manually |
+| Debugging | ✅ | Used to fix token errors & CORS issues |
+| Documentation | ✅ | README.md drafted using ChatGPT |
+
+### Prompts Used
+
+Example prompts used during development:
+
+1. "Help me design a clean backend folder structure for a job portal."
+2. "Fix my JWT authentication error: cannot read property of undefined."
+3. "Write README.md for my MERN Job Portal project."
+
+---
+
+## 🎯 Features
+
+### Core Features
+- ✅ **User Authentication** - Secure login/register with JWT
+- ✅ **Job Search & Filters** - Search jobs by title, location, company
+- ✅ **Apply for Jobs** - One-click application with resume upload
+- ✅ **Recruiter Dashboard** - Manage job postings and applications
+- ✅ **Manage Job Listings** - Create, update, delete job posts
+- ✅ **JWT Security** - Token-based authentication and authorization
+- ✅ **Responsive UI** - Mobile-first design with Tailwind CSS
+
+### User Roles
+- 👤 **Candidates** - Browse and apply for jobs
+- 👨‍💼 **Recruiters** - Post jobs and review applications
+
+---
+
+## 🚀 Future Enhancements
+
+- [ ] Add email notifications for job applications
+- [ ] Implement advanced filters (salary range, experience level)
+- [ ] Add real-time chat between recruiters and candidates
+- [ ] Integrate payment gateway for premium job listings
+- [ ] Add resume parser functionality
+- [ ] Implement job recommendation algorithm
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the project
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+---
 
 
-🤖 AI Usage Log
-AI Tools Used
+## 🙏 Acknowledgments
 
-ChatGPT
+- Thanks to the MERN stack community
+- Shadcn UI for beautiful components
+- MongoDB for excellent documentation
 
-Model: GPT-5.1
+---
 
-Purpose of AI Assistance
-Task	Used AI?	Description
-UI Design	❌	Designed manually
-Backend Logic	❌	Implemented manually
-Debugging	✔	Used to fix token errors & CORS issues
-Documentation	✔	README.md drafted using ChatGPT
-Prompts Used
+## 📝 Conclusion
 
-(Add any prompts you used in developing the project — or paste ChatGPT transcript)
-Example:
+This job portal project demonstrates proficiency in:
 
-"Help me design a clean backend folder structure for a job portal."
-"Fix my JWT authentication error: cannot read property of undefined."
-"Write README.md for my MERN Job Portal project."
+- ✔️ **Full-stack development** with MERN stack
+- ✔️ **REST API design** and implementation
+- ✔️ **MongoDB schema modeling** and relationships
+- ✔️ **Secure authentication** with JWT
+- ✔️ **Modern UI development** with React and Tailwind CSS
+- ✔️ **Role-based access control** (RBAC)
+- ✔️ **Responsive design** principles
 
-🎯 Features
+---
 
-✔ User Authentication
-✔ Job Search & Filters
-✔ Apply for Jobs
-✔ Recruiter Dashboard
-✔ Manage Job Listings
-✔ JWT Security
-✔ Responsive UI
-
-📝 Conclusion
-
-This job portal project demonstrates skills in:
-
-Full-stack development
-
-REST API design
-
-MongoDB schema modeling
-
-Secure authentication
-
-Modern UI development
